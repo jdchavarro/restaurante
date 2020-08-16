@@ -1,0 +1,9 @@
+.cabecera {
+    text-align: center;
+}
+
+.tituloPagina {
+    font-weight: bold;
+    text-transform: uppercase;
+    font: 2em sans-serif;
+}

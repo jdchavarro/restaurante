@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+Route::get('/login', 'LoginController@index');
+
+Route::post('/login', 'LoginController@iniciarSesion');
+
+Route::get('/home/{usuario}', 'LoginController@home');
+
+
+Route::resource('/Empleado', 'EmpleadoController');
+Route::resource('/Rol', 'RolController');
+Route::resource('/Usuario', 'UsuarioController');
