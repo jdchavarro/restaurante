@@ -1,7 +1,7 @@
 @extends('layouts.panelControl')
 
 @section('cabecera')
-<h1 class="tituloPagina">PANEL DE ADMINISTRADOR</h1>
+administrador
 @endsection
 
 @section('menuNavegacion')

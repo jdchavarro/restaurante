@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
+@include('layouts.head')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RESTAURANTE</title>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/panelControl.css') }}">
 
-    {{-- Styles --}}
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
+<div class="cabecera">@yield('cabecera')
+    <h1 class="tituloPagina">PANEL DE {{ App\Usuario::find(session('id'))->rol->nombreRol }}</h1>
+    <a href="{{ asset('/logout') }}">cerrar sesion</a>
+</div>
+<div class="menuNavegacion">@yield('menuNavegacion')</div>
+<div class="areaPrincipal">@yield('areaPrincipal')</div>
+<div class="pie">@yield('pie')</div>
 
-<body>
-    <div class="cabecera">@yield('cabecera')</div>
-    <div class="menuNavegacion">@yield('menuNavegacion')</div>
-    <div class="areaPrincipal">@yield('areaPrincipal')</div>
-    <div class="pie">@yield('pie')</div>
-
-    {{-- Scripts --}}
-    <script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-</body>
-
-</html>
+@include('layouts.foot')

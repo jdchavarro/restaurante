@@ -1,7 +1,7 @@
 @extends('layouts.panelControl')
 
 @section('cabecera')
-<h1 class="tituloPagina">PANEL DE CAJA</h1>
+cajero
 @endsection
 
 @section('menuNavegacion')

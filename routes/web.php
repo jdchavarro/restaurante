@@ -2,27 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('login');
+    if (session()->has('id')) {
+        return redirect('/home');
+    } else {
+        return view('index');
+    }
 });
 
 Route::get('/login', 'LoginController@index');
-
 Route::post('/login', 'LoginController@iniciarSesion');
-
-Route::get('/home/{usuario}', 'LoginController@home');
-
+Route::get('/home', 'LoginController@home');
+Route::get('/logout', 'LoginController@cerrarSesion');
 
 Route::resource('/Empleado', 'EmpleadoController');
 Route::resource('/Rol', 'RolController');
