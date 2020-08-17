@@ -18,3 +18,8 @@ Route::get('/logout', 'LoginController@cerrarSesion');
 Route::resource('/Empleado', 'EmpleadoController');
 Route::resource('/Rol', 'RolController');
 Route::resource('/Usuario', 'UsuarioController');
+Route::resource('/Proveedor', 'ProveedorController');
+Route::resource('/Ingrediente', 'IngredienteController');
+Route::resource('/Compra', 'CompraController');
+Route::resource('/Categoria', 'CategoriaController');
+Route::resource('/Producto', 'ProductoController');
