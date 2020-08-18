@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Proveedor;
+use App\Usuario;
 use Illuminate\Http\Request;
 
-class ProveedorController extends Controller
-{
+class ProveedorController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $proveedores = Proveedor::all();
+                return view('proveedor.indexProveedor', compact('proveedores'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -21,9 +29,14 @@ class ProveedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                return view('proveedor.crearProveedor');
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -32,8 +45,7 @@ class ProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -43,8 +55,7 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -54,8 +65,7 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -66,8 +76,7 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -77,8 +86,7 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

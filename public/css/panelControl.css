@@ -1,1 +1,28 @@
+.cabecera h1,
+a {
+    display: inline;
+}
 
+.contenedor {
+    display: grid;
+    grid-template-areas:
+        "cabecera cabecera cabecera"
+        "menuNavegacion areaPrincipal areaPrincipal"
+        "pie pie pie";
+}
+
+.cabecera {
+    grid-area: cabecera;
+}
+
+.menuNavegacion {
+    grid-area: menuNavegacion;
+}
+
+.areaPrincipal {
+    grid-area: areaPrincipal;
+}
+
+.pie {
+    grid-area: pie;
+}

@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label for="nombreUsuario">Nombre de Usuario</label>
-        <input type="text" required class="form-control" id="nombreUsuario" name="nombreUsuario"
+        <input type="text" required autofocus class="form-control" id="nombreUsuario" name="nombreUsuario"
             aria-describedby="emailHelp" placeholder="Ingrese Nombre de Usuario">
     </div>
     <div class="form-group">

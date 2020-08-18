@@ -48,7 +48,7 @@ class LoginController extends Controller {
 
             switch ($usuario->rol->nombreRol) {
                 case "administrador":
-                    return view('administrador');
+                    return view('administrador.indexAdministrador');
                     break;
                 case "cajero":
                     return view('cajero');

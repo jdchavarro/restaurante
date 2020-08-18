@@ -4,8 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
-{
+class Usuario extends Model {
+
+    protected $fillable = [
+        "nombreUsuario",
+        "contrasena",
+        "rol_id",
+        "empleado_id"
+    ];
+
     /**
      * Asociamos el empleado con el usuario
      */
