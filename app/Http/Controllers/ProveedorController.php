@@ -46,7 +46,26 @@ class ProveedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+
+                $proveedor = new Proveedor;
+                $proveedor->nit = $request->nit;
+                $proveedor->nombreProveedor = $request->nombreProveedor;
+                $proveedor->direccion = $request->direccion;
+                $proveedor->telefono = $request->telefono;
+                $proveedor->save();
+
+                $proveedores = Proveedor::all();
+
+                $mensaje = "Proveedor Creador Correctamente";
+
+                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -56,7 +75,14 @@ class ProveedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $proveedor = Proveedor::find($id);
+                return view('proveedor.mostrarProveedor', compact('proveedor'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -66,7 +92,14 @@ class ProveedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $proveedor = Proveedor::find($id);
+                return view('proveedor.editarProveedor', compact('proveedor'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -77,7 +110,24 @@ class ProveedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+
+                $proveedor = Proveedor::find($id);
+                $proveedor->nombreProveedor = $request->nombreProveedor;
+                $proveedor->direccion = $request->direccion;
+                $proveedor->telefono = $request->telefono;
+                $proveedor->save();
+
+                $proveedores = Proveedor::all();
+
+                $mensaje = "Proveedor Actualizado Correctamente";
+
+                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -87,6 +137,21 @@ class ProveedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+
+                $proveedor = Proveedor::find($id);
+
+                $proveedor->delete();
+
+                $proveedores = Proveedor::all();
+
+                $mensaje = "Proveedor Eliminado Correctamente";
+
+                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 }

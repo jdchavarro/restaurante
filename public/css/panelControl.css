@@ -26,3 +26,18 @@ a {
 .pie {
     grid-area: pie;
 }
+
+.formulario {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.tituloSeccion {
+    text-align: center;
+}
+
+.tablaMostrarRegistros {
+    outline: 1px solid red;
+    width: 80%;
+    margin: 0 auto;
+}
