@@ -2,13 +2,13 @@
 
 @section('areaPrincipal')
 
-<h2 class="tituloSeccion">MODIFICAR PROVEEDOR</h2>
+<h2 class="tituloSeccion">BORRAR PROVEEDOR</h2>
 
 <div class="formulario">
-    <form action="{{  asset('proveedor/'.$proveedor->id)  }}" method="post" id="formularioCrearProveedor">
+    <form action="{{  asset('proveedor/'.$proveedor->id)  }}" method="post">
         @csrf
 
-        @method("PUT")
+        @method("DELETE")
 
         <div class="form-group">
             <label for="nitProveedor">Nit</label>
@@ -18,23 +18,23 @@
 
         <div class="form-group">
             <label for="nombreProveedor">Nombre</label>
-            <input type="text" class="form-control" name="nombreProveedor" id="nombreProveedor"
+            <input type="text" class="form-control" readonly name="nombreProveedor" id="nombreProveedor"
                 value="{{ $proveedor->nombreProveedor }}">
         </div>
 
         <div class=" form-group">
             <label for="direccionProveedor">Direccion</label>
-            <input type="text" class="form-control" name="direccion" id="direccionProveedor"
+            <input type="text" class="form-control" readonly name="direccion" id="direccionProveedor"
                 value="{{ $proveedor->direccion }}">
         </div>
 
         <div class=" form-group">
             <label for="telefonoProveedor">Telefono</label>
-            <input type="number" class="form-control" name="telefono" id="telefonoProveedor"
+            <input type="number" class="form-control" readonly name="telefono" id="telefonoProveedor"
                 value="{{ $proveedor->telefono }}">
         </div>
 
-        <button type=" submit" class="btn btn-success">MODIFICAR</button>
+        <button type=" submit" class="btn btn-danger">ELIMINAR</button>
     </form>
 
 </div>

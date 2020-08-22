@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class ProveedorController extends Controller {
     /**
-     * Display a listing of the resource.
-     *
+     * Muestra una tabla con los proveedores
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index() {
@@ -17,7 +17,7 @@ class ProveedorController extends Controller {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedores = Proveedor::all();
-                return view('proveedor.indexProveedor', compact('proveedores'));
+                return view('proveedor.index', compact('proveedores'));
             }
         } else {
             return redirect("/");
@@ -25,14 +25,14 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Muestra un formulario para crear un proveedor
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create() {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
-                return view('proveedor.crearProveedor');
+                return view('proveedor.crear');
             }
         } else {
             return redirect("/");
@@ -40,7 +40,7 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena los datos del proveedor, provenientes del formulario de creacion
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -59,9 +59,9 @@ class ProveedorController extends Controller {
 
                 $proveedores = Proveedor::all();
 
-                $mensaje = "Proveedor Creador Correctamente";
+                $mensaje = "Proveedor Creado Correctamente";
 
-                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+                return view('proveedor.index', compact('proveedores', 'mensaje'));
             }
         } else {
             return redirect("/");
@@ -69,7 +69,7 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un proveedor en particular, para confirmar la eliminacion
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -78,7 +78,7 @@ class ProveedorController extends Controller {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedor = Proveedor::find($id);
-                return view('proveedor.mostrarProveedor', compact('proveedor'));
+                return view('proveedor.mostrar', compact('proveedor'));
             }
         } else {
             return redirect("/");
@@ -86,7 +86,7 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra un formulario para la edicion del proveedor
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -95,7 +95,7 @@ class ProveedorController extends Controller {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedor = Proveedor::find($id);
-                return view('proveedor.editarProveedor', compact('proveedor'));
+                return view('proveedor.editar', compact('proveedor'));
             }
         } else {
             return redirect("/");
@@ -103,7 +103,7 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza en base de datos la informacion proveniente de edit
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -123,7 +123,7 @@ class ProveedorController extends Controller {
 
                 $mensaje = "Proveedor Actualizado Correctamente";
 
-                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+                return view('proveedor.index', compact('proveedores', 'mensaje'));
             }
         } else {
             return redirect("/");
@@ -131,7 +131,7 @@ class ProveedorController extends Controller {
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina (softDelete) el proveedor
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -148,7 +148,7 @@ class ProveedorController extends Controller {
 
                 $mensaje = "Proveedor Eliminado Correctamente";
 
-                return view('proveedor.indexProveedor', compact('proveedores', 'mensaje'));
+                return view('proveedor.index', compact('proveedores', 'mensaje'));
             }
         } else {
             return redirect("/");

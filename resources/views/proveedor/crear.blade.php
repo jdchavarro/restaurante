@@ -5,7 +5,7 @@
 <h2 class="tituloSeccion">CREAR PROVEEDOR</h2>
 
 <div class="formulario">
-    <form action="/proveedor" method="post" id="formularioCrearProveedor">
+    <form action="/proveedor" method="post">
         @csrf
 
         <div class="form-group">
