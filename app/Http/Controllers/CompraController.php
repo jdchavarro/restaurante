@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Compra;
 use App\Ingrediente;
 use App\Proveedor;
+use App\Usuario;
 
 class CompraController extends Controller {
     /**
@@ -14,26 +15,17 @@ class CompraController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        /* $compra = new Compra;
-        $compra->numeroFactura = 22;
-        $compra->fechaCompra = date("Y-m-d");
-        $compra->total = 12000;
 
-        $proveedor = Proveedor::find(1);
-        $compra->proveedor()->associate($proveedor);
-
-        $compra->save();
-
-        $ingredientes = Ingrediente::find(1);
-        $compra->ingredientes()->attach($ingredientes, ['precio' => 2500, 'cantidad' => 3]);
-
-        $ingredientes = Ingrediente::find(2);
-        $compra->ingredientes()->attach($ingredientes, ['precio' => 3500, 'cantidad' => 5]);
-
-        echo "hola mundo"; */
-
-        /* $compra = Compra::find(2);
-        echo $compra->ingredientes[0]->nombreIngrediente; */
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $compras = Compra::with(['proveedor' => function ($query) {
+                    $query->withTrashed();
+                }])->orderBy('fechaCompra', 'desc')->get();
+                return view('compra.index', compact('compras'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -42,7 +34,27 @@ class CompraController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+
+        $compra = new Compra;
+        $compra->numeroFactura = 14;
+        $compra->fechaCompra = date("Y-m-d");
+        $compra->total = 15000;
+
+        $proveedor = Proveedor::find(3);
+        $compra->proveedor()->associate($proveedor);
+
+        $compra->save();
+
+        $ingredientes = Ingrediente::find(2);
+        $compra->ingredientes()->attach($ingredientes, ['precio' => 2500, 'cantidad' => 3]);
+
+        $ingredientes = Ingrediente::find(3);
+        $compra->ingredientes()->attach($ingredientes, ['precio' => 3500, 'cantidad' => 5]);
+
+        echo "hola mundo";
+
+        /* $compra = Compra::find(2);
+        echo $compra->ingredientes[0]->nombreIngrediente; */
     }
 
     /**

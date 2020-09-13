@@ -17,7 +17,7 @@
         <div class="list-group">
             <a href="{{ asset('/proveedor') }}" class="list-group-item list-group-item-action">Proveedores</a>
             <a href="{{ asset('/ingrediente') }}" class="list-group-item list-group-item-action">Ingredientes</a>
-            <a href="" class="list-group-item list-group-item-action">Compras</a>
+            <a href="{{ asset('/compra') }}" class="list-group-item list-group-item-action">Compras</a>
             <a href="" class="list-group-item list-group-item-action">Categorias</a>
             <a href="" class="list-group-item list-group-item-action">Productos</a>
             <a href="" class="list-group-item list-group-item-action">Adiciones</a>
