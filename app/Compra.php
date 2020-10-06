@@ -19,6 +19,6 @@ class Compra extends Model {
 
 
     public function ingredientes() {
-        return $this->belongsToMany('App\Ingrediente');
+        return $this->belongsToMany('App\Ingrediente')->withPivot('id', 'precio', 'cantidad');
     }
 }

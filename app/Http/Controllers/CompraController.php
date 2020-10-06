@@ -74,7 +74,16 @@ class CompraController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                /* $compra = Compra::find($id)->with(['ingrediente']); */
+                $compra = Compra::find($id);
+                $ingredientes = $compra->ingredientes()->get();
+                return view('compra.show', compact('compra', 'ingredientes'));
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**

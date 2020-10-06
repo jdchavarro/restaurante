@@ -27,8 +27,8 @@
                 <td>{{ $compra->proveedor->nombreProveedor }}</td>
                 <td>{{ $compra->total }}</td>
                 <td>
-                    <a href="{{ asset('compra/'.$compra->id.'/edit') }}">editar</a>
                     <a href="{{ asset('compra/'.$compra->id) }}">ver</a>
+                    <a href="{{ asset('compra/'.$compra->id.'/edit') }}">editar</a>
                 </td>
             </tr>
             @endforeach
