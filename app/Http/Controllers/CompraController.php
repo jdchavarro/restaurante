@@ -58,44 +58,44 @@ class CompraController extends Controller {
      */
     public function store(Request $request) {
 
-        $compra = new Compra;
-        $compra->numeroFactura = $request->numeroFactura;
-        $compra->fechaCompra = $request->fechaCompra;
-        $compra->total = 0;
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
 
-        $proveedor = Proveedor::find($request->idProveedor);
-        $compra->proveedor()->associate($proveedor);
-        $compra->save();
+                $compra = new Compra;
+                $compra->numeroFactura = $request->numeroFactura;
+                $compra->fechaCompra = $request->fechaCompra;
+                $compra->total = 0;
 
-        $ingredientes = Ingrediente::all();
-        foreach ($ingredientes as $ingrediente) {
+                $proveedor = Proveedor::find($request->idProveedor);
+                $compra->proveedor()->associate($proveedor);
+                $compra->save();
 
-            if ($request['precio' . $ingrediente->id] != "" && $request['cantidad' . $ingrediente->id] != "") {
+                $ingredientes = Ingrediente::all();
+                foreach ($ingredientes as $ingrediente) {
 
-                $compra->total += ($request['precio' . $ingrediente->id]) * ($request['cantidad' . $ingrediente->id]);
-                $compra->ingredientes()->attach($ingrediente, [
-                    'precio' => $request['precio' . $ingrediente->id],
-                    'cantidad' => $request['cantidad' . $ingrediente->id]
-                ]);
-                $ingrediente->cantidadDisponible += $request['cantidad' . $ingrediente->id];
-                $ingrediente->save();
+                    if ($request['precio' . $ingrediente->id] != "" && $request['cantidad' . $ingrediente->id] != "") {
+
+                        $compra->total += ($request['precio' . $ingrediente->id]) * ($request['cantidad' . $ingrediente->id]);
+                        $compra->ingredientes()->attach($ingrediente, [
+                            'precio' => $request['precio' . $ingrediente->id],
+                            'cantidad' => $request['cantidad' . $ingrediente->id]
+                        ]);
+                        $ingrediente->cantidadDisponible += $request['cantidad' . $ingrediente->id];
+                        $ingrediente->save();
+                    }
+                }
+
+                $compra->save();
+
+                $mensaje = "Compra registrada Correctamente";
+                $compras = Compra::all();
+                return view('compra.index', compact('compras', 'mensaje'));
+            } else {
+                return redirect("/");
             }
+        } else {
+            return redirect("/");
         }
-
-        $compra->save();
-
-        /* 
-
-        $ingredientes = Ingrediente::find(2);
-        $compra->ingredientes()->attach($ingredientes, ['precio' => 2500, 'cantidad' => 3]);
-
-        $ingredientes = Ingrediente::find(3);
-        $compra->ingredientes()->attach($ingredientes, ['precio' => 3500, 'cantidad' => 5]); */
-
-        echo "hola mundo";
-
-        /* $compra = Compra::find(2);
-        echo $compra->ingredientes[0]->nombreIngrediente; */
     }
 
     /**

@@ -18,8 +18,8 @@
             <a href="{{ asset('/proveedor') }}" class="list-group-item list-group-item-action">Proveedores</a>
             <a href="{{ asset('/ingrediente') }}" class="list-group-item list-group-item-action">Ingredientes</a>
             <a href="{{ asset('/compra') }}" class="list-group-item list-group-item-action">Compras</a>
-            <a href="" class="list-group-item list-group-item-action">Categorias</a>
-            <a href="" class="list-group-item list-group-item-action">Productos</a>
+            <a href="{{ asset('/categoria') }}" class="list-group-item list-group-item-action">Categorias</a>
+            <a href="{{ asset('/producto') }}" class="list-group-item list-group-item-action">Productos</a>
             <a href="" class="list-group-item list-group-item-action">Adiciones</a>
             <a href="" class="list-group-item list-group-item-action">Roles</a>
             <a href="" class="list-group-item list-group-item-action">Empleados</a>

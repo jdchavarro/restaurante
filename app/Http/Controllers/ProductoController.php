@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ingrediente;
+use App\Usuario;
+use App\Producto;
+use App\Categoria;
 
-class ProductoController extends Controller
-{
+class ProductoController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $productos = Producto::all();
+                return view('producto.index', compact('productos'));
+            } else {
+                return redirect("/");
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -21,9 +32,18 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $categorias = Categoria::all();
+                $ingredientes = Ingrediente::all();
+                return view('producto.crear', compact('categorias', 'ingredientes'));
+            } else {
+                return redirect("/");
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -32,9 +52,44 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+
+                $producto = new Producto;
+                $producto->codigo = $request->codigo;
+                $producto->nombreProducto = $request->nombreProducto;
+                $producto->precio = $request->precio;
+                $producto->cantidadDisponible = 0;
+                $producto->preparacion = $request->preparacion;
+
+                $categoria = Categoria::find($request->idCategoria);
+                $producto->categoria()->associate($categoria);
+
+                $producto->save();
+
+                $ingredientes = Ingrediente::all();
+                foreach ($ingredientes as $ingrediente) {
+                    if ($request['cantidadIngrediente' . $ingrediente->id] != "" && $request['cantidadProducto' . $ingrediente->id] != "") {
+
+                        $producto->ingredientes()->attach($ingrediente, [
+                            'cantidadIngrediente' => $request['cantidadIngrediente' . $ingrediente->id],
+                            'cantidadProducto' => $request['cantidadProducto' . $ingrediente->id]
+                        ]);
+                    }
+                }
+
+                $producto->save();
+
+                $mensaje = "Producto creado Correctamente";
+                $productos = Producto::all();
+                return view('producto.index', compact('mensaje', 'productos'));
+            } else {
+                return redirect("/");
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -43,8 +98,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -54,8 +108,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -66,8 +119,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -77,8 +129,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }
