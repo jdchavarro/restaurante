@@ -18,6 +18,8 @@ class ProveedorController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedores = Proveedor::all();
                 return view('proveedor.index', compact('proveedores'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -33,6 +35,8 @@ class ProveedorController extends Controller {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 return view('proveedor.crear');
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -62,6 +66,8 @@ class ProveedorController extends Controller {
                 $mensaje = "Proveedor Creado Correctamente";
 
                 return view('proveedor.index', compact('proveedores', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -79,6 +85,8 @@ class ProveedorController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedor = Proveedor::find($id);
                 return view('proveedor.mostrar', compact('proveedor'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -96,6 +104,8 @@ class ProveedorController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $proveedor = Proveedor::find($id);
                 return view('proveedor.editar', compact('proveedor'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -124,6 +134,8 @@ class ProveedorController extends Controller {
                 $mensaje = "Proveedor Actualizado Correctamente";
 
                 return view('proveedor.index', compact('proveedores', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -149,6 +161,8 @@ class ProveedorController extends Controller {
                 $mensaje = "Proveedor Eliminado Correctamente";
 
                 return view('proveedor.index', compact('proveedores', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");

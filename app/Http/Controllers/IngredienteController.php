@@ -19,6 +19,8 @@ class IngredienteController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $ingredientes = Ingrediente::all();
                 return view('ingrediente.index', compact('ingredientes'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -34,6 +36,8 @@ class IngredienteController extends Controller {
         if (session()->has('id')) {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 return view('ingrediente.crear');
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -62,6 +66,8 @@ class IngredienteController extends Controller {
                 $mensaje = "Ingrediente Creado Correctamente";
 
                 return view('ingrediente.index', compact('ingredientes', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -79,6 +85,8 @@ class IngredienteController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $ingrediente = Ingrediente::find($id);
                 return view('ingrediente.mostrar', compact('ingrediente'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -96,6 +104,8 @@ class IngredienteController extends Controller {
             if ($this->esAdmin(Usuario::find(session('id')))) {
                 $ingrediente = Ingrediente::find($id);
                 return view('ingrediente.editar', compact('ingrediente'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -123,6 +133,8 @@ class IngredienteController extends Controller {
                 $mensaje = "Ingrediente Actualizado Correctamente";
 
                 return view('ingrediente.index', compact('ingredientes', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
@@ -148,6 +160,8 @@ class IngredienteController extends Controller {
                 $mensaje = "Ingrediente Eliminado Correctamente";
 
                 return view('ingrediente.index', compact('ingredientes', 'mensaje'));
+            } else {
+                return redirect("/");
             }
         } else {
             return redirect("/");
