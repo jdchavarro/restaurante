@@ -14,12 +14,31 @@
     <div class="menuNavegacion">
         @yield('menuNavegacion')
 
+        <nav class="nav nav-tabs flex-column">
+            <li class="nav-item"><a href="{{ asset('/proveedor') }}" class="nav-link">Proveedores</a></li>
+            <li class="nav-item"><a href="{{ asset('/ingrediente') }}" class="nav-link">Ingredientes</a></li>
+            <li class="nav-item"><a href="{{ asset('/compra') }}" class="nav-link">Compras</a></li>
+            <li class="nav-item"><a href="{{ asset('/categoria') }}" class="nav-link">Categorias</a></li>
+            <li class="nav-item"><a href="{{ asset('/producto') }}" class="nav-link">Productos</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">Inventario</a>
+                <div class="dropdown-menu">
+                    <a href="{{ asset('/producto/inventario') }}" class="dropdown-item">Producto</a><a
+                        href="{{ asset('/adicion/inventario') }}" class="dropdown-item">Adicion</a>
+                </div>
+            </li>
+        </nav>
+
         <div class="list-group">
             <a href="{{ asset('/proveedor') }}" class="list-group-item list-group-item-action">Proveedores</a>
             <a href="{{ asset('/ingrediente') }}" class="list-group-item list-group-item-action">Ingredientes</a>
             <a href="{{ asset('/compra') }}" class="list-group-item list-group-item-action">Compras</a>
             <a href="{{ asset('/categoria') }}" class="list-group-item list-group-item-action">Categorias</a>
             <a href="{{ asset('/producto') }}" class="list-group-item list-group-item-action">Productos</a>
+
+
+
             <a href="" class="list-group-item list-group-item-action">Adiciones</a>
             <a href="" class="list-group-item list-group-item-action">Roles</a>
             <a href="" class="list-group-item list-group-item-action">Empleados</a>

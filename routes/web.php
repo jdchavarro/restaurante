@@ -14,6 +14,8 @@ Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@iniciarSesion');
 Route::get('/home', 'LoginController@home');
 Route::get('/logout', 'LoginController@cerrarSesion');
+Route::get('/producto/inventario', 'ProductoController@inventario');
+Route::get('/adicion/inventario', 'AdicionController@inventario');
 
 Route::resource('/proveedor', 'ProveedorController');
 Route::resource('/empleado', 'EmpleadoController');

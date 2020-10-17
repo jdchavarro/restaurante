@@ -120,7 +120,21 @@ class ProductoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $producto = Producto::find($id);
+                $producto->cantidadDisponible = $request->cantidadDisponible;
+                $producto->save();
+
+                $productos = Producto::all();
+                $mensaje = "Producto Actualizado";
+                return view('producto.inventario', compact('productos', 'mensaje'));
+            } else {
+                return redirect("/");
+            }
+        } else {
+            return redirect("/");
+        }
     }
 
     /**
@@ -131,5 +145,18 @@ class ProductoController extends Controller {
      */
     public function destroy($id) {
         //
+    }
+
+    public function inventario() {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                $productos = Producto::all();
+                return view('producto.inventario', compact('productos'));
+            } else {
+                return redirect("/");
+            }
+        } else {
+            return redirect("/");
+        }
     }
 }
