@@ -14,4 +14,16 @@ class Controller extends BaseController {
     public function esAdmin(Usuario $usuario) {
         return ($usuario->rol->nombreRol == "administrador") ? true : false;
     }
+
+    public function tienePermiso() {
+        if (session()->has('id')) {
+            if ($this->esAdmin(Usuario::find(session('id')))) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

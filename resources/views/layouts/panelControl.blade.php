@@ -28,18 +28,11 @@
                         href="{{ asset('/adicion/inventario') }}" class="dropdown-item">Adicion</a>
                 </div>
             </li>
+            <li class="nav-item"><a href="{{ asset('/adicion') }}" class="nav-link">Adiciones</a></li>
         </nav>
 
         <div class="list-group">
-            <a href="{{ asset('/proveedor') }}" class="list-group-item list-group-item-action">Proveedores</a>
-            <a href="{{ asset('/ingrediente') }}" class="list-group-item list-group-item-action">Ingredientes</a>
-            <a href="{{ asset('/compra') }}" class="list-group-item list-group-item-action">Compras</a>
-            <a href="{{ asset('/categoria') }}" class="list-group-item list-group-item-action">Categorias</a>
-            <a href="{{ asset('/producto') }}" class="list-group-item list-group-item-action">Productos</a>
 
-
-
-            <a href="" class="list-group-item list-group-item-action">Adiciones</a>
             <a href="" class="list-group-item list-group-item-action">Roles</a>
             <a href="" class="list-group-item list-group-item-action">Empleados</a>
             <a href="" class="list-group-item list-group-item-action">Usuarios</a>

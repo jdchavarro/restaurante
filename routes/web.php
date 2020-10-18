@@ -25,3 +25,4 @@ Route::resource('/ingrediente', 'IngredienteController');
 Route::resource('/compra', 'CompraController');
 Route::resource('/categoria', 'CategoriaController');
 Route::resource('/producto', 'ProductoController');
+Route::resource('/adicion', 'AdicionController');
